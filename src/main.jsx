@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import "bootswatch/dist/cerulean/bootstrap.min.css";
+import "bootswatch/dist/vapor/bootstrap.min.css";
 import { Provider } from 'react-redux';
 import store from './store';
 

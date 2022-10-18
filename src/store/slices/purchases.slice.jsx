@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import getConfig from '../../utils/getConfig';
+import { getCartThunk, setCart } from './cart.slice';
 import { setIsLoading } from './isLoading.slice';
 
 export const purchasesSlice = createSlice({
@@ -17,21 +18,26 @@ export const getPurchasesThunk = () => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.get('https://ecommerce-api-react.herokuapp.com/api/v1/purchases', getConfig())
         .then((res) => dispatch(setPurchases(res.data.data.purchases)))
+        .catch(error => console.log(error.response)) 
         .finally(() => dispatch(setIsLoading(false)));
 }
 
-export const addPurchaseThunk = (purchase) => (dispatch) => {
+export const addCartThunk = (purchase) => (dispatch) => {
     dispatch(setIsLoading(true));
-    return axios.post('https://ecommerce-api-react.herokuapp.com/api/v1/cart', purchase, getConfig())
-        .then(() => dispatch(getPurchasesThunk()))
+    return axios.post(
+        'https://ecommerce-api-react.herokuapp.com/api/v1/cart', 
+        purchase, 
+        getConfig()
+    )
+    .then(() => dispatch(getCartThunk()))
         .catch(error => console.log(error.response)) 
-        .finally(() => dispatch(setIsLoading(false)));
+    .finally(() => dispatch(setIsLoading(false)));
 }
 
 export const purchaseCartThunk = () => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.post('https://ecommerce-api-react.herokuapp.com/api/v1/purchases', {}, getConfig())
-        .then(() => dispatch(setPurchases([])))
+        .then(() => dispatch(setCart([])))
         // .catch(error => console.log(error.response)) 
         .finally(() => dispatch(setIsLoading(false)));
 }

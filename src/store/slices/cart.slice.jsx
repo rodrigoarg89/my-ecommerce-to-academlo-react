@@ -22,3 +22,4 @@ export const getCartThunk = () => (dispatch) => {
 
 export const { setCart } = cartSlice.actions;
 export default cartSlice.reducer;
+

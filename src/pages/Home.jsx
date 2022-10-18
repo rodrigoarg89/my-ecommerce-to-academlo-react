@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Button } from "bootstrap";
 import { useEffect, useState } from "react";
-import { Card, Col, Form, InputGroup, ListGroup, Row } from "react-bootstrap";
+import { Card, Carousel, Col, Form, InputGroup, ListGroup, Row, ToggleButton } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -62,33 +62,38 @@ const Home = () => {
             onChange={(e) => setSearchValue(e.target.value)}
             value={searchValue}
           />
-          <button className="btn-go"
+          <ToggleButton className="btn-go"
             onClick={searchProducts}
             variant="outline-secondary"
             id="button-addon2"
           >
             go
-          </button>
+          </ToggleButton>
         </InputGroup>
         <Row xs={1} md={2} xl={3}className="g-4">
           {productsFiltered.map((product) => (
             <Col key={product.id}>
               
-              <Card onClick={() => navigate(`./products/${product.id}`)} >
-                <div className="divCard">
-                  <div>
-                    <img className="imgCard"
-                      src={product.productImgs?.[0]}
-                    />
-                  </div>
-                </div>
-                  
+              <Card className="cardProducts"  >
+                <div className='fle-card'>
+                 <Carousel className="carousel">
+                   {product.productImgs.map((img) => (
+                   <Carousel.Item key={img}>
+                    <div className="card-products">
+                      <div className="card-img">
+                        <img className="img-card" src={img} alt="First slide" />
+                       </div>
+                     </div>
+                     {/* <Carousel.Caption></Carousel.Caption> */}
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
                 <Card.Body>
                   <Card.Title>{product.title}</Card.Title>
-                  <Card.Text>Precio USD {product.price}</Card.Text>
-                  <button className='addProduct'><i class="fa-solid fa-cart-plus"></i></button>
+                  <Card.Text>USD {product.price}</Card.Text>
+                  <button className='addProduct' onClick={() => navigate(`./products/${product.id}`)}><i className="fa-solid fa-cart-plus"></i></button>
                 </Card.Body>
-
+                </div>
               </Card>
             </Col>
           ))}
