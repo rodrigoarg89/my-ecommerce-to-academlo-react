@@ -42,7 +42,7 @@ const Login = () => {
           Submit
         </Button>
       </Form><br />
-      To prove e-commerce funtionality, please enter email <br />  carrito@gmail.com  <br /> and password <br /> carrito1234
+      To prove e-commerce funtionality, please enter email <br />  john@gmail.com  <br /> and password <br /> john1234
     </div>
   );
 };
