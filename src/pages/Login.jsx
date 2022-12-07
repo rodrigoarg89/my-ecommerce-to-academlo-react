@@ -12,7 +12,7 @@ const Login = () => {
     
     const submit = (data) => {
       //  console.log(data)
-       axios.post('https://ecommerce-api-react.herokuapp.com/api/v1/users/login', data)
+       axios.post('https://e-commerce-api.academlo.tech/api/v1/users/login', data)
              .then(res => {
                 localStorage.setItem('token', res.data.data.token);
                 navigate("/");
@@ -42,7 +42,7 @@ const Login = () => {
           Submit
         </Button>
       </Form><br />
-      To prove e-commerce funtionality, please enter email <br />   rodrigoargaraz89@gmail.com <br /> and password <br /> pass1234
+      To prove e-commerce funtionality, please enter email <br />  carrito@gmail.com  <br /> and password <br /> carrito1234
     </div>
   );
 };
